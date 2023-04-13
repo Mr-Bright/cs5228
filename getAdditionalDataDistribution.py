@@ -35,6 +35,8 @@ def getAddtionalDataDistribution(env,col_name):
 
     print(sorted_dict)
 
+    fig, ax = plt.subplots()
+
     # Get the keys and values from the dictionary
     keys = list(sorted_dict.keys())
     values = list(sorted_dict.values())
@@ -42,13 +44,15 @@ def getAddtionalDataDistribution(env,col_name):
     # Create a bar graph from the keys and values
     plt.bar(range(len(keys)), values, tick_label=keys)
 
+    plt.setp(ax.get_xticklabels(), rotation=90, ha="right",
+             rotation_mode="anchor")
     # Add labels to the graph
     plt.xlabel('Number')
     plt.ylabel('Amount')
     name = env+' '+col_name+' Graph'
     plt.title(name)
 
-    # Save the figure as a PNG file
+    #Save the figure as a PNG file
     plt.savefig('figure/'+name+'.png')
 
     # Show the graph
@@ -56,7 +60,7 @@ def getAddtionalDataDistribution(env,col_name):
 
 def getTwoDatasetFigure(feature):
     getAddtionalDataDistribution('train', feature)
-    getAddtionalDataDistribution('test', feature)
+    #getAddtionalDataDistribution('test', feature)
 
 if __name__ == '__main__':
     getTwoDatasetFigure('sg-primary-schools_lessHalfKMNum')
